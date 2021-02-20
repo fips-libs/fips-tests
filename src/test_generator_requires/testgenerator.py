@@ -32,17 +32,17 @@ def get_generator_path() :
     """find util_generate_requires exectuable, fail if not exists"""
 
     bin_path = os.path.abspath('{}/util_generate_requires{}'.format(deploy_path, extension))
-    print "TRY: " + bin_path
+    print("TRY: " + bin_path)
     if not os.path.isfile(bin_path) :
         os_name = platform.system().lower()
         bin_path = '{}/util_generate_requires{}'.format(proj_path, extension)
         bin_path = os.path.normpath(bin_path)
-        print "TRY: " + bin_path
+        print("TRY: " + bin_path)
         
         if not os.path.isfile(bin_path) :
             log.error("util_generate_requires executable not found")
 
-    print "FOUND: " + bin_path
+    print("FOUND: " + bin_path)
     return bin_path
 #-------------------------------------------------------------------------------
 
@@ -66,7 +66,8 @@ def generate(input, out_src, out_hdr) :
     if genutil.isDirty(Version, [input], [out_src, out_hdr]) :
         proc = subprocess.Popen([get_generator_path()], stdout=subprocess.PIPE)
         function_name, std_err = proc.communicate()
-        print "GENERATING FUNCTION: " + function_name
+        function_name = function_name.decode("utf-8")
+        print("GENERATING FUNCTION: " + function_name)
 
         generateHeader(out_hdr, function_name)
         generateSource(out_src, function_name)

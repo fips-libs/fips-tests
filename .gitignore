@@ -1,2 +1,4 @@
 *.pyc
 .fips-*
+src/test_generator_requires/*.cc
+src/test_generator_requires/*.h
